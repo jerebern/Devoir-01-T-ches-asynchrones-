@@ -81,7 +81,7 @@ namespace FileScanner.ViewModels
         ///TODO : Tester avec un dossier avec beaucoup de fichier
         ///TODO : Rendre l'application asynchrone
         ///TODO : Ajouter un try/catch pour les dossiers sans permission
-
+        //rdki
 
     }
 }
