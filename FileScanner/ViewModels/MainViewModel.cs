@@ -11,10 +11,11 @@ using System.Windows.Forms;
 namespace FileScanner.ViewModels
 {
     public class MainViewModel : BaseViewModel
-    {
+    { 
         private string selectedFolder;
         private ObservableCollection<string> folderItems = new ObservableCollection<string>();
          
+
         public DelegateCommand<string> OpenFolderCommand { get; private set; }
         public DelegateCommand<string> ScanFolderCommand { get; private set; }
 
@@ -68,8 +69,31 @@ namespace FileScanner.ViewModels
             {
                 FolderItems.Add(item);
             }
+
+            
         }
 
+        private async void AsyncScanFolder(string dir)
+        {
+
+            await Task.Run(() =>
+            {
+
+
+            FolderItems = new ObservableCollection<string>(GetDirs(dir));
+
+              foreach (var item in Directory.EnumerateFiles(dir, "*"))
+              {
+                FolderItems.Add(item);
+
+
+     //           foreach (var item in Directory.EnumerateFiles(dir, "*"))
+      //          {
+      //              FolderItems.Add(item);
+     //           }
+               }});
+
+        }
         IEnumerable<string> GetDirs(string dir)
         {            
             foreach (var d in Directory.EnumerateDirectories(dir, "*"))
@@ -81,7 +105,6 @@ namespace FileScanner.ViewModels
         ///TODO : Tester avec un dossier avec beaucoup de fichier
         ///TODO : Rendre l'application asynchrone
         ///TODO : Ajouter un try/catch pour les dossiers sans permission
-        //rdki
 
     }
 }
