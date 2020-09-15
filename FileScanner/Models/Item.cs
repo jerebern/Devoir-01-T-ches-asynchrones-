@@ -7,10 +7,16 @@ using System.Text;
 
 namespace FileScanner.Models
 {
-    class Items : INotifyPropertyChanged
+    public class Item : INotifyPropertyChanged
     {
         private string fileName;
         private string img;
+
+        public Item(string fileName, string img)
+        {
+            this.fileName = fileName;
+            this.img = img;
+        }
 
         public string Img
         {
