@@ -21,7 +21,7 @@
             <TextBlock Text="Selected folder : "/>
             <TextBlock Text="{Binding SelectedFolder}"/>
         </StatusBar>
-        
+
         <Grid>
             <ListView ItemsSource="{Binding Items}">
                 <ListView.ItemTemplate>
@@ -32,7 +32,7 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>            
         </Grid>
     </DockPanel>
 </Window>
