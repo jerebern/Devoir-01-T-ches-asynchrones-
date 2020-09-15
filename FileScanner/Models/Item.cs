@@ -8,7 +8,7 @@ using System.Text;
 
 namespace FileScanner.Models
 {
-    public class Item : BaseViewModel
+    public class Item : INotifyPropertyChanged
     {
         private string fileName;
         private string img;
