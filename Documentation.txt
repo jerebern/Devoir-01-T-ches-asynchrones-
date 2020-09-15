@@ -1,0 +1,13 @@
+Liste view avec Image 
+https://github.com/nbourre/0SS_semaine_04/tree/master/wpf_listview
+
+Lecture Fichier vs Fichier
+Conversation Discord 1ss-Développement-sujet-spéciaux 
+
+Modèle de classe avec INotifyPropertyChanged et Rappel en général WPF
+https://github.com/jerebern/travail_03 
+
+Explication sur le Multitache
+https://stackoverflow.com/questions/13140523/await-vs-task-wait-deadlock/13140963#13140963
+https://github.com/nbourre/sujets_speciaux_async_exemples
+https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/
