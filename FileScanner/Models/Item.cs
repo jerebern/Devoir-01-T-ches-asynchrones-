@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileScanner.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace FileScanner.Models
 {
-    public class Item : INotifyPropertyChanged
+    public class Item : BaseViewModel
     {
         private string fileName;
         private string img;

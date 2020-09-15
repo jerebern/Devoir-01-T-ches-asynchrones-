@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,7 +17,6 @@ namespace FileScanner.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private string scannerTimer;
         private string selectedFolder;
         private ObservableCollection<string> folderItems = new ObservableCollection<string>();
         private ObservableCollection<Item> items = new ObservableCollection<Item>();
@@ -39,18 +39,6 @@ namespace FileScanner.ViewModels
             { 
                 folderItems = value;
                 OnPropertyChanged();
-            }
-        }
-
-        public string ScannerTimer
-        {
-
-            get => scannerTimer;
-            set
-            {
-                scannerTimer = value;
-                OnPropertyChanged();
-
             }
         }
 
@@ -99,37 +87,34 @@ namespace FileScanner.ViewModels
             
         }
 
-        //Stop watch source : https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.stopwatch?view=netcore-3.1
-        //Tell if file or folder : https://stackoverflow.com/questions/1395205/better-way-to-check-if-a-path-is-a-file-or-a-directory
-
         private async void ScanFolderAsync(string dir)
         {
-            Stopwatch stopWatch = new Stopwatch();
-
+             Items = new ObservableCollection<Item>();
             await Task.Run(() =>
             {
                 try
                 {
-                    items = new ObservableCollection<Item>();
+
                     foreach (var path in Directory.EnumerateDirectories(dir, "*"))
                     {
 
-                        Item item = new Item(path, "/Images/file.png");
+                     Item item = new Item(path, "/img/folder.png");
 
                         App.Current.Dispatcher.BeginInvoke(
                             (Action)delegate ()
-                            {
+                            {  
                                 Items.Add(item);
                             });
                     }
-                    foreach (var path in Directory.EnumerateDirectories(dir, "*"))
+                    foreach (var path in Directory.EnumerateFiles(dir, "*"))
                     {
-                        Item item = new Item(path, "/Images/file.png");
+                        Item item = new Item(path, "/img/file.png");
 
                         App.Current.Dispatcher.BeginInvoke(
                             (Action)delegate ()
                             {
                                 Items.Add(item);
+
                             });
                     }
                 }
@@ -138,8 +123,7 @@ namespace FileScanner.ViewModels
                     MessageBox.Show("Access denied  ");
                 }
             });
-            stopWatch.Stop();
-            scannerTimer = stopWatch.ElapsedMilliseconds.ToString();
+            Debug.WriteLine( items.Count());
         }
         IEnumerable<string> GetDirs(string dir)
         {            
@@ -148,10 +132,6 @@ namespace FileScanner.ViewModels
                 yield return d;
             }
         }
-
-        ///TODO : Tester avec un dossier avec beaucoup de fichier
-        ///TODO : Rendre l'application asynchrone
-        ///TODO : Ajouter un try/catch pour les dossiers sans permission
 
     }
 }
